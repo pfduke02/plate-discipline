@@ -108,8 +108,12 @@ td.shop small{display:block;color:var(--muted);font-size:var(--t-xs)}
 .pill.ignored{background:var(--ignored-bg);color:#6c5f52}
 .reason{font-size:var(--t-xs);color:var(--muted)}
 
-.method dt{font-weight:700;color:var(--ink);margin-top:14px}
-.method dd{margin:4px 0 0;color:var(--ink2)}
+.method h2{margin-top:4px}
+.method dl{display:grid;grid-template-columns:minmax(180px,.7fr) 1.7fr;column-gap:34px;row-gap:18px;margin:16px 0 0}
+.method dt{font-weight:700;color:var(--ink);margin:0}
+.method dd{margin:0;color:var(--ink2);max-width:70ch}
+.method .tagline,.method .note{max-width:80ch}
+@media(max-width:720px){.method dl{grid-template-columns:1fr;row-gap:5px}.method dt{margin-top:14px}}
 .note{background:#faf3e7;border:1px dashed var(--crust);border-radius:10px;padding:12px 15px;font-size:var(--t-sm);color:#6a5334;margin-top:16px;line-height:1.5}
 
 .idea-grid{display:grid;grid-template-columns:1.55fr .82fr;gap:44px;align-items:start;margin-top:16px}
@@ -256,7 +260,7 @@ footer{padding:32px 0 60px;color:var(--muted);font-size:var(--t-sm);border-top:1
 
 <template id="view-methodology">
   <section class="section">
-    <div class="wrap prose method">
+    <div class="wrap method">
       <p class="eyebrow">Methodology</p>
       <h2>How the numbers are built</h2>
       <dl>
