@@ -3,6 +3,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Plate Discipline — The Moneyball of NYC Food</title>
 <link rel="icon" type="image/svg+xml" href="logo.svg">
+<meta name="description" content="The Moneyball of NYC pizza. Where to actually go tonight — worth-it picks, underrated sleepers, and the overhyped spots to skip, from 57k+ reviews.">
+<meta name="theme-color" content="#fbf6ee">
+<meta property="og:title" content="Plate Discipline — The Moneyball of NYC Food">
+<meta property="og:description" content="Where should you actually get pizza tonight? Worth-it picks, underrated sleepers, and the ones to skip.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.platedisciplinenyc.com/">
+<meta name="twitter:card" content="summary">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.js" integrity="sha384-iU8HYtnGQ8Cy4zl7gbNMOhsDTTKX02BTXptVP/vqAWIaTfM7isw76iyZCsjL2eVi" crossorigin="anonymous"></script>
 <style>
 :root{
@@ -146,6 +153,63 @@ footer{padding:32px 0 60px;color:var(--muted);font-size:var(--t-sm);border-top:1
 .comingwrap .big{font-family:var(--serif);font-size:40px;margin-bottom:8px}
 .comingwrap p{max-width:50ch;margin:0 auto 6px;color:var(--ink2)}
 @media(max-width:720px){.top .wrap{flex-wrap:wrap;height:auto;min-height:56px;padding-top:7px;padding-bottom:7px;gap:8px 12px}.tabs{order:3;flex-basis:100%;margin-left:0;flex-wrap:wrap}.navspacer{display:none}}
+
+/* ===== responsive ===== */
+html,body{overflow-x:hidden}
+img,svg,canvas{max-width:100%}
+h1,h2,h3,p,.lead,.pull,td,.reason{overflow-wrap:break-word}
+.idea-grid.vcenter{align-items:center}
+.promise{font-size:var(--t-sm);color:var(--ink2);line-height:1.5;margin:14px 0 0}
+.promise .muted-note{color:var(--muted)}
+@media(max-width:720px){
+  .wrap{padding:0 16px}
+  .section{padding:26px 0}
+  .top .wrap{height:auto;min-height:0;padding:8px 14px;gap:7px 10px;flex-wrap:wrap}
+  .brand{font-size:16.5px;gap:8px}
+  .brand small{display:none}
+  .logo{width:26px;height:26px}
+  .tabs{order:3;flex-basis:100%;flex-wrap:nowrap;overflow-x:auto;margin-left:0;padding:1px 0 3px;gap:6px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .tabs::-webkit-scrollbar{display:none}
+  .tab{flex-shrink:0;white-space:nowrap;padding:6px 12px}
+  .navlink{flex-shrink:0;white-space:nowrap;border:1px solid var(--line);border-radius:999px;padding:6px 12px;color:var(--ink2)}
+  .navlink[aria-selected="true"]{border-color:var(--tomato)}
+  .navspacer{display:none}
+  .hero{padding:22px 0 16px}
+  .hero h1{font-size:33px}
+  .hero .kick{font-size:18px}
+  .hero .lead{font-size:16.5px}
+  .chips{gap:9px}
+  .chip{min-width:0;flex:1 1 42%;padding:10px 13px}
+  #app{display:flex;flex-direction:column}
+  .sec-hero{order:0}.sec-tool{order:1}.sec-idea{order:2}.sec-why{order:3}
+  #flavor-mount{display:flex;flex-direction:column}
+  #flavor-mount>.eyebrow{order:0}
+  #flavor-mount>h2{order:1}
+  #flavor-mount>.tagline{order:2}
+  #flavor-mount>.controls{order:3}
+  #flavor-mount>.boards{order:4}
+  #flavor-mount>.grid2{order:5;margin-top:8px}
+  .chartbox{height:320px}.chartbox.sm{height:250px}
+  .grid2{gap:16px}
+  .legend{gap:8px 12px}
+  .board table,.board tbody,.board tr,.board td{display:block}
+  .board thead{display:none}
+  .board tr{border:1px solid var(--line);border-radius:12px;padding:11px 44px 12px 13px;margin-bottom:9px;position:relative;background:var(--card)}
+  .board tbody tr:hover{background:var(--card)}
+  .board td{border:none;padding:0}
+  .board td.rank{position:absolute;top:11px;right:13px;width:auto;font-weight:700;color:var(--muted)}
+  .board td.shop b{font-size:15px}
+  .board td.shop small{display:block;margin-top:3px}
+  .board td.num{display:inline-block;margin:9px 18px 0 0;font-size:14.5px;font-weight:700}
+  .board td.num::before{content:attr(data-label) " ";display:block;color:var(--muted);font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;font-weight:700;margin-bottom:1px}
+  .idea-grid{gap:20px}
+  .insp{padding:18px 18px}
+}
+@media(max-width:400px){
+  .chip{flex:1 1 100%}
+  .hero h1{font-size:29px}
+  .board td.num{margin-right:14px}
+}
 </style>
 
 <header class="top">
@@ -158,17 +222,18 @@ footer{padding:32px 0 60px;color:var(--muted);font-size:var(--t-sm);border-top:1
 
 <!-- ============ PIZZA VIEW ============ -->
 <template id="view-pizza">
-  <section class="section hero">
+  <section class="section hero sec-hero">
     <div class="wrap">
       <p class="eyebrow">Pizzaball · New York City</p>
       <h1>Skip the line.<br>Find the sleeper.</h1>
       <p class="kick">Over- and underrated New York pizza, measured.</p>
       <p class="lead">If you're visiting and want to queue for <b>Ceres</b>, <b>Di Fara</b>, <b>L'Industrie</b> or <b>Lucali</b>, do it — those are the 2000 Jason Giambis: elite by reputation <em>and</em> by the underlying numbers. This is for the rest of us who live here — the neighborhood spots where the star rating doesn't tell the whole story, and the reviews fill in the rest.</p>
+      <p class="promise">Where should you actually get pizza tonight? <b>Worth-it picks</b>, underrated <b>sleepers</b>, and the ones to <b>skip</b>. <span class="muted-note">A demo, not gospel.</span></p>
       <div class="chips" id="chips"></div>
     </div>
   </section>
 
-  <section class="section">
+  <section class="section sec-idea">
     <div class="wrap">
       <p class="eyebrow">The idea</p>
       <h2>The OBP of pizza</h2>
@@ -195,18 +260,18 @@ footer{padding:32px 0 60px;color:var(--muted);font-size:var(--t-sm);border-top:1
   </section>
 
 
-  <section class="section">
+  <section class="section sec-tool">
     <div class="wrap">
       <div class="flavornav" id="flavornav"></div>
       <div id="flavor-mount"></div>
     </div>
   </section>
 
-  <section class="section">
+  <section class="section sec-why">
     <div class="wrap">
       <p class="eyebrow">Why it works</p>
       <h2>Which signals actually repeat</h2>
-      <div class="idea-grid" style="grid-template-columns:1.15fr .85fr;align-items:center">
+      <div class="idea-grid vcenter">
         <div class="panel">
           <div class="chartbox sm"><canvas id="persist"></canvas></div>
         </div>
@@ -363,7 +428,7 @@ function buildChips(){
 
 const FLAVORS={
   goskip:{label:"Where to Go", sub:"the worth-it line"},
-  gems:{label:"Hidden Gems", sub:"attention vs quality"},
+  gems:{label:"Hidden Gems", sub:"great pizza, less hype"},
 };
 function renderFlavorNav(){
   const nav=document.getElementById("flavornav"); nav.innerHTML="";
@@ -475,6 +540,7 @@ const worthLine={id:"worthLine",beforeDatasetsDraw(c){const{ctx,chartArea:a,scal
   ctx.fillStyle="rgba(46,158,91,.9)";ctx.textAlign="right";ctx.fillText("WORTH IT ▲",a.right-10,a.top+18);
   ctx.restore();}};
 function drawGoSkip(){
+  const MOB=window.innerWidth<=720;
   const rows=goskipRows(), ctx=document.getElementById("chart"); if(!ctx)return;
   const top5=new Set(rows.slice().sort((a,b)=>worthOf(b)-worthOf(a)).slice(0,5).map(r=>r.name));
   const pts=rows.map(r=>({x:r.current_rating,y:r.nudge,d:r,top:top5.has(r.name)}));
@@ -490,8 +556,8 @@ function drawGoSkip(){
       pointStyle:pts.map(p=>p.top?"star":"circle"),
       pointRadius:pts.map(p=>p.top?11:5),pointHoverRadius:pts.map(p=>p.top?13:8)}]},
     options:{responsive:true,maintainAspectRatio:false,layout:{padding:6},
-      scales:{x:{min:6,max:10,title:{display:true,text:"Current rating  (One Bite community)  ▶ more loved",font:{size:12,weight:"600"}},grid:{color:"#f0e7d8"}},
-              y:{min:ymin,max:ymax,title:{display:true,text:"◀ predicts a dip      FORWARD SIGNAL (what reviews predict)      predicts a lift ▶",font:{size:11,weight:"600"}},grid:{color:"#f0e7d8"}}},
+      scales:{x:{min:6,max:10,title:{display:true,text:MOB?"Current rating":"Current rating  (One Bite community)  ▶ more loved",font:{size:12,weight:"600"}},grid:{color:"#f0e7d8"}},
+              y:{min:ymin,max:ymax,title:{display:true,text:MOB?"← skip · signal · go →":"◀ predicts a dip      FORWARD SIGNAL (what reviews predict)      predicts a lift ▶",font:{size:11,weight:"600"}},grid:{color:"#f0e7d8"}}},
       plugins:{legend:{display:false},
         tooltip:{callbacks:{label:c=>{const d=c.raw.d;const s=d.nudge>=0?"+":"";const w=worthOf(d);
           return [`${c.raw.top?"★ ":""}${d.name} — ${d.borough}`,
@@ -505,8 +571,8 @@ function gsRow(r,i,metric){
     : {cls:"", txt:worthOf(r).toFixed(1)};
   return `<tr><td class="rank">${i+1}</td>
     <td class="shop"><b>${r.name}</b><small>${r.borough} · <span class="reason">${reasonFor(r)}</span></small></td>
-    <td class="num">${r.current_rating.toFixed(1)}</td>
-    <td class="num metric ${m.cls}" style="font-weight:700">${m.txt}</td></tr>`;
+    <td class="num" data-label="Rate">${r.current_rating.toFixed(1)}</td>
+    <td class="num metric ${m.cls}" data-label="${metric==="signal"?"Signal":"Adj"}">${m.txt}</td></tr>`;
 }
 function renderGoSkipBoards(){
   const r=goskipRows();
@@ -574,6 +640,7 @@ const quadBG={id:"quadBG",beforeDatasetsDraw(c){const{ctx,chartArea:a,scales}=c;
   ctx.fillStyle="rgba(154,143,131,.95)";ctx.textAlign="left";ctx.fillText("IGNORED",a.left+8,a.bottom-10);
   ctx.fillStyle="rgba(209,73,91,.85)";ctx.textAlign="right";ctx.fillText("OVERRATED",a.right-8,a.bottom-10);ctx.restore();}};
 function drawGems(){
+  const MOB=window.innerWidth<=720;
   const rows=gemsRows(),ctx=document.getElementById("chart");if(!ctx)return;
   const groups={underrated:[],consensus:[],overrated:[],ignored:[]};
   rows.forEach(r=>groups[r.quadrant].push({x:r.attention,y:r.quality,d:r}));
@@ -583,8 +650,8 @@ function drawGems(){
     data:{datasets:order.map(([k,lab])=>({label:lab,data:groups[k],parsing:false,
       backgroundColor:QC[k].c+"cc",borderColor:"#fff",borderWidth:.5,pointRadius:4,pointHoverRadius:7}))},
     options:{responsive:true,maintainAspectRatio:false,layout:{padding:6},
-      scales:{x:{min:0,max:1,title:{display:true,text:"◀ less known      ATTENTION      more famous ▶",font:{size:12,weight:"600"}},ticks:{callback:v=>Math.round(v*100)},grid:{color:"#f0e7d8"}},
-              y:{min:0,max:1,title:{display:true,text:"QUALITY ▶",font:{size:12,weight:"600"}},ticks:{callback:v=>Math.round(v*100)},grid:{color:"#f0e7d8"}}},
+      scales:{x:{min:0,max:1,title:{display:true,text:MOB?"Attention →":"◀ less known      ATTENTION      more famous ▶",font:{size:12,weight:"600"}},ticks:{callback:v=>Math.round(v*100)},grid:{color:"#f0e7d8"}},
+              y:{min:0,max:1,title:{display:true,text:MOB?"Quality ↑":"QUALITY ▶",font:{size:12,weight:"600"}},ticks:{callback:v=>Math.round(v*100)},grid:{color:"#f0e7d8"}}},
       plugins:{legend:{display:false},
         tooltip:{callbacks:{label:c=>{const d=c.raw.d;
           return [`${d.name} — ${d.borough} ${d.zip}`,
@@ -595,8 +662,8 @@ function dedupe(list){const seen=new Set(),out=[];for(const r of list){if(seen.h
 function gemRow(r,i){const q=r.quadrant;
   return `<tr><td class="rank">${i+1}</td>
     <td class="shop"><b>${r.name}</b><small>${r.borough} ${r.zip} · <span class="pill ${q==="underrated"?"under":q}">${q}</span></small></td>
-    <td class="num">${Math.round(r.quality*100)}</td><td class="num">${Math.round(r.attention*100)}</td>
-    <td class="num metric ${r.gap>=0?"pos":"neg"}">${r.gap>0?"+":""}${Math.round(r.gap*100)}</td></tr>`;}
+    <td class="num" data-label="Qual">${Math.round(r.quality*100)}</td><td class="num" data-label="Att\u2019n">${Math.round(r.attention*100)}</td>
+    <td class="num metric ${r.gap>=0?"pos":"neg"}" data-label="Gap">${r.gap>0?"+":""}${Math.round(r.gap*100)}</td></tr>`;}
 function renderGemsBoards(){
   const r=gemsRows();
   const under=dedupe(r.filter(x=>x.gap>0).sort((a,b)=>b.gap-a.gap)).slice(0,12);
