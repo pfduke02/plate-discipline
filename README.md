@@ -1,6 +1,6 @@
 # Plate Discipline
 
-**The Moneyball of NYC food** — an over/underrated guide to New York pizza (Mexican and Thai next).
+**The Moneyball of NYC food** — an over/underrated guide to New York pizza, Mexican, and Thai. Live at [platedisciplinenyc.com](https://www.platedisciplinenyc.com).
 
 Star ratings, the line out the door, the cheese-pull photo describe *attention*,
 not the next slice. Plate Discipline borrows the Moneyball move: separate the
@@ -32,9 +32,11 @@ Two views:
 
 ## Data
 
-One Bite (Barstool) public reviews (~57k, 2018–2026), NYC DOHMH inspections,
-editorial "best pizza" lists via the Wayback Machine, and a Yelp snapshot.
-NYC only. A demo — signals, not gospel.
+Model fit on the Yelp Open Dataset (~7M dated reviews, 11 metros); NYC venues
+scored on current Google Places ratings and reviews. Venue universe from NYC
+DOHMH inspections; attention axis from editorial best-of lists (Eater,
+Infatuation, Grub Street). The earlier One Bite–only pizza build (~57k dated
+slices, 2018–2026) is archived as v1. NYC only. A demo — signals, not gospel.
 
 ## Logo
 

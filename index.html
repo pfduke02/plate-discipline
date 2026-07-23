@@ -10,7 +10,11 @@
 <meta property="og:description" content="Over- and underrated restaurants, measured — one cuisine at a time.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.platedisciplinenyc.com/">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://www.platedisciplinenyc.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.platedisciplinenyc.com/og-image.png">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.js" integrity="sha384-iU8HYtnGQ8Cy4zl7gbNMOhsDTTKX02BTXptVP/vqAWIaTfM7isw76iyZCsjL2eVi" crossorigin="anonymous"></script>
 <style>
 :root{
@@ -114,6 +118,7 @@ td.shop small{display:block;color:var(--muted);font-size:var(--t-xs)}
 .pill.consensus{background:var(--consensus-bg);color:#204b93}
 .pill.over,.pill.skip{background:var(--skip-bg);color:#93313d}
 .pill.ignored{background:var(--ignored-bg);color:#6c5f52}
+.pill.chain{background:var(--ignored-bg);color:#6c5f52}
 .reason{font-size:var(--t-xs);color:var(--muted)}
 
 .method h2{margin-top:4px}
@@ -173,7 +178,7 @@ footer{padding:32px 0 60px;color:var(--muted);font-size:var(--t-sm);border-top:1
 @media(max-width:720px){.top .wrap{flex-wrap:wrap;height:auto;min-height:56px;padding-top:7px;padding-bottom:7px;gap:8px 12px}.tabs{order:3;flex-basis:100%;margin-left:0;flex-wrap:wrap}.navspacer{display:none}}
 
 /* ===== responsive ===== */
-html,body{overflow-x:hidden}
+html,body{overflow-x:clip} /* clip, not hidden — hidden creates a scroll container and kills the sticky header */
 img,svg,canvas{max-width:100%}
 h1,h2,h3,p,.lead,.pull,td,.reason{overflow-wrap:break-word}
 .idea-grid.vcenter{align-items:center}
@@ -256,13 +261,13 @@ h1,h2,h3,p,.lead,.pull,td,.reason{overflow-wrap:break-word}
       <div class="idea-grid">
         <div class="idea-copy">
           <p class="lead">The primary insight in Moneyball was to judge hitters on on-base percentage. OBP was the metric to exploit because it had four qualities at once: a <b>mechanism</b> — plate discipline, the batter's eye this site is named for — it <b>persisted</b> season to season, it <b>mapped to runs</b>, and the market still had it <b>mispriced</b>.</p>
-          <p>So what's the <b>OBP of NYC pizza</b> — the thing that signals tomorrow's slice? Not <em>was it good once</em>, but <em>what is this shop likely to be again?</em> It first showed up in One&nbsp;Bite: across <b>57,498</b> dated slices, ratings hold year to year at a corrected slope near <b>0.63</b> — a real trait, not a lottery ball. The cross-cuisine version now trains on <b>over a million dated Yelp reviews</b> and scores each NYC spot on its <b>live Google rating</b>. The OBP isn't the highest rating; it's the <b>quality that reputation hasn't fully baked in</b> — and it runs on any cuisine.</p>
+          <p>So what's the <b>OBP of NYC pizza</b> — the thing that signals tomorrow's slice? Not <em>was it good once</em>, but <em>what is this shop likely to be again?</em> It first showed up in One&nbsp;Bite: across <b>57,498</b> dated slices, ratings hold year to year at a corrected slope near <b>0.63</b> (≈0.68 in the wider Yelp panel) — a real trait, not a lottery ball. The cross-cuisine version now trains on <b>over a million dated Yelp reviews</b> and scores each NYC spot on its <b>live Google rating</b>. The OBP isn't the highest rating; it's the <b>quality that reputation hasn't fully baked in</b> — and it runs on any cuisine.</p>
           <div class="tease">
             <div class="tlabel">What the reviews reward</div>
             <div class="tline"><span class="up">▲</span> coal- &amp; wood-fired char</div>
             <div class="tline"><span class="up">▲</span> real sauce, fresh mozzarella</div>
             <div class="tline"><span class="up">▲</span> classic NY slice-work</div>
-            <p class="tnote">Not "real New York grease" — that just bounces back. <a href="#" onclick="go('pizza');return false;">See the full pizza board →</a></p>
+            <p class="tnote">Not "real New York grease" — that just bounces back. <a href="#/pizza">See the full pizza board →</a></p>
           </div>
         </div>
         <aside class="idea-card">
@@ -384,8 +389,8 @@ h1,h2,h3,p,.lead,.pull,td,.reason{overflow-wrap:break-word}
 </template>
 
 <footer><div class="wrap">
-  <b style="font-family:var(--serif)">Plate Discipline</b> — Moneyball for what you eat.<br>
-  Data: Yelp Open Dataset (model fit), Google Places (NYC current ratings &amp; reviews), NYC DOHMH inspections, editorial best-of lists. A reputation model — signals, not a final verdict.
+  <b style="font-family:var(--serif)">Plate Discipline</b> — Moneyball for what you eat. · <a href="#/methodology">Methodology</a><br>
+  Data: Yelp Open Dataset (model fit), Google Places (NYC current ratings &amp; reviews), NYC DOHMH inspections, editorial best-of lists. A reputation model — signals, not a final verdict. Data refreshed July 2026.
 </div></footer>
 
 <script>
@@ -429,8 +434,8 @@ const CU_PIZZA = {
 };
 const CU_MEXICAN = {
   emoji:"🌮", place:"Mexican · New York",
-  headLine:"784 taquerías graded — the model reads review text to find who's rising.",
-  gemsSub:"Taquerías with enough reviews to model.",
+  headLine:"784 NYC Mexican spots graded — the model reads review text to find who's rising.",
+  gemsSub:"Mexican spots with enough reviews to model.",
   gemsGH:"The overrated trap",
   gemsGT:"Chains cluster bottom-right — <b>Chipotle</b>, <b>Taco Bell</b>, <b>Qdoba</b>: enormous review volume, low modeled quality. Fame the kitchen can't cash.",
   findingsH2:"What predicts a great taquería",
@@ -463,7 +468,7 @@ const CU_THAI = {
     {d:"up",t:"wok execution (pad see ew, wok hei)",v:"+.02"},
     {d:"dn",t:"oily / soggy decay",v:"\u2212.03"}
   ],
-  coefFoot:"The lagged score sets the base (\u03B2 \u2248 0.39, t = 28); momentum mean-reverts (\u2212.15). The score leads; the reviews only tilt."
+  coefFoot:"The lagged score sets the base (\u03B2 \u2248 0.39, t = 28 raw; \u2248 0.66 attenuation-corrected); momentum mean-reverts (\u2212.15). The score leads; the reviews only tilt."
 };
 
 /* ---------- shell / nav ---------- */
@@ -476,11 +481,26 @@ const NAV = [
 ];
 let state={section:"home", cuisine:"pizza", flavor:"goskip", borough:"all"};
 let chart=null;
-let DATA=PIZZA_DATA, WORTH_W=6.4, WORTH_CUT=8, CU=CU_PIZZA, SCALE={xmax:10,floor:6,good:7.5};
+let DATA=PIZZA_DATA, WORTH_W=6.4, WORTH_CUT=8, GOOD_CUT=4.3, CU=CU_PIZZA, SCALE={xmax:10,floor:6,good:7.5};
 const REC_FRAC=0.25;
+const MIN_REV=50;   // boards require this many Google reviews; the maps show everyone
 
 function tpl(id){ return document.getElementById("view-"+id).content.cloneNode(true); }
-function go(section){ state.section=section; if(section==="pizza"||section==="mexican"||section==="thai") state.cuisine=section; renderNav(); renderView(); }
+
+/* ---------- hash routing: #/pizza etc. are deep-linkable and the back button works ---------- */
+const SECTIONS=["home","pizza","mexican","thai","methodology"];
+const TITLES={home:"Plate Discipline — Moneyball for what you eat",
+  pizza:"NYC Pizza, Over- & Underrated — Plate Discipline",
+  mexican:"NYC Mexican, Over- & Underrated — Plate Discipline",
+  thai:"NYC Thai, Over- & Underrated — Plate Discipline",
+  methodology:"Methodology — Plate Discipline"};
+function routeFromHash(){ const h=(location.hash||"").replace(/^#\/?/,"").toLowerCase(); return SECTIONS.includes(h)?h:"home"; }
+function go(section){ const target=section==="home"?"#/":"#/"+section;
+  if(location.hash===target||(section==="home"&&!location.hash)) applyRoute(); else location.hash=target; }
+function applyRoute(){ const section=routeFromHash();
+  state.section=section; if(section==="pizza"||section==="mexican"||section==="thai") state.cuisine=section;
+  document.title=TITLES[section]; renderNav(); renderView(); }
+window.addEventListener("hashchange",applyRoute);
 
 function renderNav(){
   const nav=document.getElementById("tabs"); nav.innerHTML="";
@@ -527,6 +547,7 @@ function initCuisine(){
   // a genuine 6-10; Google-scored cuisines flip to native 1-5 here at the redo. Defaults = no change.
   SCALE = {xmax:5,floor:1,good:2.5};
   WORTH_CUT = worthCut();
+  GOOD_CUT = Math.round(medianRating()*10)/10;   // "rated well" threshold for the trap board: cuisine median
   CU = cuInfo();
   renderCuisineHead(); buildChips(); renderFlavorNav(); renderFlavor(); renderFindings();
   window.scrollTo(0,0);
@@ -540,14 +561,14 @@ function renderCuisineHead(){
 function buildChips(){
   const rb=DATA.filter(r=>r.rating_eligible && r.current_rating>=SCALE.floor);
   const picks=rb.filter(r=>worthOf(r)>=WORTH_CUT).length;
-  const pass=rb.filter(r=>worthOf(r)<WORTH_CUT && r.current_rating>=SCALE.good).length;
-  const venueN = DATA.filter(r=>r.rating_eligible).length;
-  const venueL = state.cuisine==="mexican" ? "NYC taquerías" : state.cuisine==="thai" ? "NYC Thai spots" : "NYC pizzerias";
+  const below=rb.length-picks;                      // complement of picks — the cards always sum
+  const venueN = rb.length;
+  const venueL = state.cuisine==="mexican" ? "NYC Mexican spots" : state.cuisine==="thai" ? "NYC Thai spots" : "NYC pizzerias";
   const reviews = state.cuisine==="mexican" ? "445,837" : state.cuisine==="thai" ? "114,081" : "475,819";
   document.getElementById("chips").innerHTML=`
     <div class="chip"><b>${venueN}</b><span>${venueL}</span></div>
     <div class="chip g"><b>${picks}</b><span>worth-it picks</span></div>
-    <div class="chip s"><b>${pass}</b><span>looks good, pass</span></div>
+    <div class="chip s"><b>${below}</b><span>below the bar</span></div>
     <div class="chip"><b>${reviews}</b><span>reviews analyzed</span></div>`;
 }
 
@@ -574,8 +595,9 @@ function renderFlavor(){
   const m=document.getElementById("flavor-mount");
   if(state.flavor==="goskip") m.innerHTML=goskipMarkup(); else m.innerHTML=gemsMarkup();
   wireBoro();
-  if(state.flavor==="goskip"){ drawGoSkip(); renderGoSkipBoards(); }
-  else { drawGems(); renderGemsBoards(); }
+  // boards first, then the chart — the lists still render if the chart lib fails to load
+  if(state.flavor==="goskip"){ renderGoSkipBoards(); drawGoSkip(); }
+  else { renderGemsBoards(); drawGems(); }
 }
 
 /* ---------- worth math ---------- */
@@ -591,13 +613,71 @@ function xMin(){   // per-cuisine, data-driven left edge: ~3rd pctile of current
   const p=cr[Math.floor((cr.length-1)*0.03)];
   return Math.floor(p*2)/2;
 }
+function medianRating(){ const a=allEligible().map(r=>r.current_rating).sort((x,y)=>x-y); return a.length?a[Math.floor(a.length/2)]:4.3; }
+
+/* ---------- display hygiene: DOHMH legal names → shop names; duplicate rows collapse ---------- */
+const ACRO=new Set(["kfc","dq","nyc","bklyn","uws","les","bbq","aj","jj","tj","ii","iii","iv"]);
+const LEGAL_SUFFIX=/,?\s+(llc|l\.l\.c\.|inc\.?|corp\.?|ltd\.?)$/i;
+const CUIS_WORDS={pizza:["pizza","pizzeria","slice"],mexican:["taco","taqueria","taquería","mexican","burrito","cantina"],thai:["thai"]};
+function displayName(raw){
+  let n=(raw||"").trim().replace(/\s{2,}/g," ").replace(/’/g,"'");
+  n=n.replace(/\s*#\s*\d+[a-z]*;?$/i,"");                    // store numbers + trailing junk ("#3641uy;")
+  n=n.replace(LEGAL_SUFFIX,"");                              // trailing LLC / Corp / Inc
+  const parts=n.split(/,\s+/);
+  if(parts.length===2){                                      // compound legal names: keep the cuisine-side half
+    const kw=CUIS_WORDS[state.cuisine]||[];
+    const hit=parts.filter(p=>kw.some(w=>p.toLowerCase().includes(w)));
+    if(hit.length===1) n=hit[0];
+  }
+  n=n.split(" ").map((w,i)=>{
+    const bare=w.replace(/[^a-z]/gi,"").toLowerCase();
+    if(ACRO.has(bare)) return w.toUpperCase().replace(/'S\b/,"'s");
+    if(i>0&&/^(And|Of|The)$/.test(w)) return w.toLowerCase();          // Moon And Back → Moon and Back
+    if(/^[A-Z0-9&'.-]+$/.test(w)&&w.replace(/[^A-Z]/g,"").length>=4)   // ALL-CAPS words → title case
+      w=w.charAt(0)+w.slice(1).toLowerCase();
+    return w;
+  }).join(" ");
+  n=n.replace(/([A-Za-z])'S(?=\s|$|,|\.|&)/g,"$1's");        // Danny'S → Danny's
+  return n.trim();
+}
+const tokName=s=>((s||"").toLowerCase().replace(/[^a-z0-9 ]/g," ").split(/\s+/).filter(w=>w&&!/^\d+$/.test(w)).sort().join(" "));
+const flatName=s=>(s||"").toLowerCase().replace(/[^a-z0-9]/g,"");
+function dupeKeys(r){
+  return [tokName(r.name)+"|"+(r.quality??"")+"|"+(r.google_n??""),          // word-order / apostrophe variants
+          r.zip? r.zip+"|"+(r.quality??"")+"|"+(r.attention??"") : null];    // same shop, same zip, same stats
+}
+function dedupe(list){   // one shop per row on the boards; keeps the first (already-ranked) row
+  const seen=new Set(),out=[];
+  for(const r of list){
+    const keys=dupeKeys(r).filter(Boolean);
+    if(keys.some(k=>seen.has(k))){
+      const kept=out.find(o=>dupeKeys(o).filter(Boolean).some(k=>keys.includes(k)));
+      if(kept&&!kept.zip&&r.zip){kept.zip=r.zip;}            // backfill a missing zip from the duplicate
+      continue;
+    }
+    keys.forEach(k=>seen.add(k)); out.push(r);
+  }
+  return out;
+}
+const CHAIN_ROOTS=["dominos","chipotle","tacobell","papajohns","pizzahut","littlecaesars","kfc","qdoba","californiapizzakitchen","chilis"];
+function chainRoot(r){ const f=flatName(r.name); for(const c of CHAIN_ROOTS){ if(f.includes(c)) return c; } return null; }
+function collapseChains(list){   // one row per chain brand on the boards, with a location count
+  const out=[],byRoot=new Map();
+  for(const r of list){
+    const root=r.is_chain?chainRoot(r):null;
+    if(root){ const kept=byRoot.get(root); if(kept){ kept._locs=(kept._locs||1)+1; continue; } byRoot.set(root,r); r._locs=1; }
+    out.push(r);
+  }
+  return out;
+}
+function boardPool(rows){ return dedupe(rows.filter(r=>r.google_n>=MIN_REV)); }
 
 /* ---------- FLAVOR: WHERE TO GO ---------- */
 function goskipMarkup(){
   return `
   <p class="eyebrow">The mispricing map</p>
   <h2>Rated well — and the reviews agree</h2>
-  <p class="tagline">Current rating on the <b>x-axis</b> (higher = more loved); the <b>review signal</b> on the y. The dashed diagonal is the <b>worth-it bar</b> — the top quarter by <b>adjusted score</b> (the rating plus its review signal). Points clear it (<b style="color:${GO}">green</b>), fall short despite a positive review signal (<b style="color:${YEL}">yellow</b>), or carry a negative one (<b style="color:${SKIP}">red</b>); the five <b style="color:${STAR}">blue stars</b> are the best bets overall. The signal is scaled so a typical swing in review signal counts about as much as a typical swing in rating — which is why a strong review can lift a modest rating onto the list and a bad one can drop a high one.</p>
+  <p class="tagline">Current rating on the <b>x-axis</b> (higher = more loved); the <b>review signal</b> on the y. The dashed diagonal is the <b>worth-it bar</b> — the top quarter by <b>adjusted score</b> (the rating plus its review signal). Points clear it (<b style="color:${GO}">green</b>), fall short despite a positive review signal (<b style="color:${YEL}">yellow</b>), or carry a negative one (<b style="color:${SKIP}">red</b>); the five <b style="color:${STAR}">blue stars</b> are the best bets overall. The signal is scaled so a typical swing in review signal counts about as much as a typical swing in rating — which is why a strong review can lift a modest rating onto the list and a bad one can drop a high one. Boards cover shops with ${MIN_REV}+ Google reviews; the map shows everyone.</p>
   <div class="controls">${boroSelect()}</div>
   <div class="grid2">
     <div class="panel">
@@ -624,12 +704,12 @@ function goskipMarkup(){
       <table><thead><tr><th>#</th><th>Shop</th><th class="num">Rate</th><th class="num">Adj</th></tr></thead>
       <tbody id="best-body"></tbody></table></div>
     <div class="board panel"><h3><span style="color:${QC.underrated.c}">▲</span> Most underrated</h3>
-      <div class="sub">Overlooked — reviews vouch beyond the number</div>
+      <div class="sub">The next tier — strongest review signals beyond the best bets (rated 4.0+)</div>
       <table><thead><tr><th>#</th><th>Shop</th><th class="num">Rate</th><th class="num">Signal</th></tr></thead>
       <tbody id="under-body"></tbody></table></div>
     <div class="board panel"><h3><span style="color:${QC.overrated.c}">▼</span> Looks good, but pass</h3>
-      <div class="sub">Hype tax — rated 7.5+, but the reviews warn</div>
-      <table><thead><tr><th>#</th><th>Shop</th><th class="num">Rate</th><th class="num">Adj</th></tr></thead>
+      <div class="sub">Hype tax — rated ${GOOD_CUT.toFixed(1)}+, but the reviews warn</div>
+      <table><thead><tr><th>#</th><th>Shop</th><th class="num">Rate</th><th class="num">Signal</th></tr></thead>
       <tbody id="pass-body"></tbody></table></div>
   </div>`;
 }
@@ -644,8 +724,10 @@ function reasonFor(r){
     return "reviews run cool";
   }
   if(r.nudge>=0.05){
-    if(r.specificity>=4.1) return "specific, detailed praise";
     if(r.score_delta<=-0.6) return "quietly climbing";
+    if(r.specificity>=4.5) return "unusually specific praise";
+    if(r.n_rev>=500) return "praise at volume";
+    if(r.specificity>=4.1) return "specific, detailed praise";
     return "reviews vouch for it";
   }
   return "reviews neutral";
@@ -664,9 +746,10 @@ const worthLine={id:"worthLine",beforeDatasetsDraw(c){const{ctx,chartArea:a,scal
   ctx.fillStyle="rgba(46,158,91,.9)";ctx.textAlign="right";ctx.fillText("WORTH IT ▲",a.right-10,a.top+18);
   ctx.restore();}};
 function drawGoSkip(){
+  if(typeof Chart==="undefined") return;
   const MOB=window.innerWidth<=720;
   const rows=goskipRows(), ctx=document.getElementById("chart"); if(!ctx)return;
-  const top5=new Set(rows.slice().sort((a,b)=>worthOf(b)-worthOf(a)).slice(0,5).map(r=>r.name));
+  const top5=new Set(boardPool(rows).sort((a,b)=>worthOf(b)-worthOf(a)).slice(0,5).map(r=>r.name));
   const jit=s=>{let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619);}return (((h>>>0)%1000)/1000-0.5)*0.07;};
   const pts=rows.map(r=>({x:r.current_rating+jit(r.name),y:r.nudge,d:r,top:top5.has(r.name)}));
   const ns=rows.map(r=>r.nudge);
@@ -683,10 +766,10 @@ function drawGoSkip(){
       pointRadius:pts.map(p=>p.top?11:5),pointHoverRadius:pts.map(p=>p.top?13:8)}]},
     options:{responsive:true,maintainAspectRatio:false,layout:{padding:6},
       scales:{x:{min:XMIN,max:XMAX,title:{display:true,text:MOB?"Current rating →":"Current rating  ▶ more loved",font:{size:12,weight:"600"}},grid:{color:"#f0e7d8"}},
-              y:{min:ymin,max:ymax,title:{display:true,text:MOB?"← skip · signal · go →":"◀ predicts a dip      FORWARD SIGNAL (what reviews predict)      predicts a lift ▶",font:{size:11,weight:"600"}},grid:{color:"#f0e7d8"}}},
+              y:{min:ymin,max:ymax,title:{display:true,text:MOB?"← skip · signal · go →":"◀ predicts a dip      FORWARD SIGNAL (what reviews predict)      predicts a lift ▶",font:{size:11,weight:"600"}},ticks:{callback:v=>+v.toFixed(2)},grid:{color:"#f0e7d8"}}},
       plugins:{legend:{display:false},
         tooltip:{callbacks:{label:c=>{const d=c.raw.d;const s=d.nudge>=0?"+":"";const w=worthOf(d);
-          return [`${c.raw.top?"★ ":""}${d.name} — ${d.borough}`,
+          return [`${c.raw.top?"★ ":""}${displayName(d.name)} — ${d.borough}`,
                   `Rated ${d.current_rating.toFixed(1)} · signal ${s}${d.nudge.toFixed(2)} · adj ${w.toFixed(1)} ${w>=WORTH_CUT?"— worth it":""}`,
                   `${reasonFor(d)} · ${d.n_rev} reviews`];}}}}},
     plugins:[worthLine]});
@@ -696,18 +779,20 @@ function gsRow(r,i,metric){
     ? {cls:r.nudge>=0?"pos":"neg", txt:(r.nudge>=0?"+":"")+r.nudge.toFixed(2)}
     : {cls:"", txt:worthOf(r).toFixed(1)};
   return `<tr><td class="rank">${i+1}</td>
-    <td class="shop"><b>${r.name}</b><small>${r.borough} · <span class="reason">${reasonFor(r)}</span></small></td>
+    <td class="shop"><b>${displayName(r.name)}</b><small>${r.borough} · <span class="reason">${reasonFor(r)}</span></small></td>
     <td class="num" data-label="Rate">${r.current_rating.toFixed(1)}</td>
     <td class="num metric ${m.cls}" data-label="${metric==="signal"?"Signal":"Adj"}">${m.txt}</td></tr>`;
 }
 function renderGoSkipBoards(){
-  const r=goskipRows();
-  const best=r.slice().sort((a,b)=>worthOf(b)-worthOf(a)).slice(0,12);
-  const under=r.slice().sort((a,b)=>b.nudge-a.nudge).slice(0,12);
-  const pass=r.filter(x=>x.current_rating>=SCALE.good && worthOf(x)<WORTH_CUT).sort((a,b)=>worthOf(a)-worthOf(b)).slice(0,12);
+  const pool=boardPool(goskipRows());
+  const best=pool.slice().sort((a,b)=>worthOf(b)-worthOf(a)).slice(0,12);
+  const bestNames=new Set(best.map(r=>tokName(r.name)));   // name-level: a second location of a best bet isn't "underrated"
+  // three distinct questions: go tonight (best), the market hasn't caught up (under), rated well but slipping (pass)
+  const under=pool.filter(x=>!bestNames.has(tokName(x.name))&&x.current_rating>=4.0).sort((a,b)=>b.nudge-a.nudge).slice(0,12);
+  const pass=pool.filter(x=>x.current_rating>=GOOD_CUT&&x.nudge<=-0.02).sort((a,b)=>a.nudge-b.nudge).slice(0,12);
   document.getElementById("best-body").innerHTML=best.map((x,i)=>gsRow(x,i,"adj")).join("")||empty();
   document.getElementById("under-body").innerHTML=under.map((x,i)=>gsRow(x,i,"signal")).join("")||empty();
-  document.getElementById("pass-body").innerHTML=pass.map((x,i)=>gsRow(x,i,"adj")).join("")||empty();
+  document.getElementById("pass-body").innerHTML=pass.map((x,i)=>gsRow(x,i,"signal")).join("")||empty();
 }
 
 /* ---------- FLAVOR: HIDDEN GEMS ---------- */
@@ -715,7 +800,7 @@ function gemsMarkup(){
   return `
   <p class="eyebrow">Hidden Gems &amp; the Hype Tax</p>
   <h2>Quality the city hasn't baked in</h2>
-  <p class="tagline">Attention (how known — review volume, editorial lists) vs <b>modeled quality</b> (reviewer- and expectation-adjusted). This is a <b>known-to-quality ratio</b>: hidden gems are obscure by construction; the overrated are the famous chains. ${CU.gemsSub}</p>
+  <p class="tagline">Attention (how known — review volume, editorial lists) vs <b>modeled quality</b> (reviewer- and expectation-adjusted). This is a <b>known-to-quality ratio</b>: hidden gems are obscure by construction; the overrated are the famous chains. ${CU.gemsSub} Boards cover shops with ${MIN_REV}+ Google reviews; the map shows everyone.</p>
   <div class="controls">${boroSelect()}</div>
   <div class="grid2">
     <div class="panel">
@@ -731,7 +816,7 @@ function gemsMarkup(){
       <ul class="readbox">
         <li><span class="pill under">Hidden gem</span> great food, little attention — the scouting list.</li>
         <li><span class="pill consensus">Consensus</span> great and famous. The Jason Giambis — worth the line.</li>
-        <li><span class="pill over">Overrated</span> famous, weak food. Chains live here.</li>
+        <li><span class="pill over">Overrated</span> famous, but the reviews run cooler than the fame. Chains cluster here.</li>
         <li><span class="pill ignored">Ignored</span> unremarkable and unremarked. Keeps it honest.</li>
       </ul>
       <div class="callout"><h3>${CU.gemsGH}</h3>
@@ -766,6 +851,7 @@ const quadBG={id:"quadBG",beforeDatasetsDraw(c){const{ctx,chartArea:a,scales}=c;
   ctx.fillStyle="rgba(154,143,131,.95)";ctx.textAlign="left";ctx.fillText("IGNORED",a.left+8,a.bottom-10);
   ctx.fillStyle="rgba(209,73,91,.85)";ctx.textAlign="right";ctx.fillText("OVERRATED",a.right-8,a.bottom-10);ctx.restore();}};
 function drawGems(){
+  if(typeof Chart==="undefined") return;
   const MOB=window.innerWidth<=720;
   const rows=gemsRows(),ctx=document.getElementById("chart");if(!ctx)return;
   const groups={underrated:[],consensus:[],overrated:[],ignored:[]};
@@ -780,20 +866,21 @@ function drawGems(){
               y:{min:0,max:1,title:{display:true,text:MOB?"Quality ↑":"QUALITY ▶",font:{size:12,weight:"600"}},ticks:{callback:v=>Math.round(v*100)},grid:{color:"#f0e7d8"}}},
       plugins:{legend:{display:false},
         tooltip:{callbacks:{label:c=>{const d=c.raw.d;
-          return [`${d.name} — ${d.borough} ${d.zip}`,
+          return [`${displayName(d.name)} — ${d.borough}${d.zip?" "+d.zip:""}`,
                   `Quality ${Math.round(d.quality*100)} · Attention ${Math.round(d.attention*100)} · Gap ${d.gap>0?"+":""}${Math.round(d.gap*100)}`];}}}}},
     plugins:[quadBG]});
 }
-function dedupe(list){const seen=new Set(),out=[];for(const r of list){if(seen.has(r.name))continue;seen.add(r.name);out.push(r);}return out;}
-function gemRow(r,i){const q=r.quadrant;
+function gemRow(r,i){
+  const locs=r._locs>1?` · ${r._locs} NYC locations`:"";
+  const badge=r.is_chain?' · <span class="pill chain">chain</span>':"";
   return `<tr><td class="rank">${i+1}</td>
-    <td class="shop"><b>${r.name}</b><small>${r.borough} ${r.zip} · <span class="pill ${q==="underrated"?"under":q}">${q}</span></small></td>
+    <td class="shop"><b>${displayName(r.name)}</b><small>${r.borough}${r.zip?" "+r.zip:""}${locs}${badge}</small></td>
     <td class="num" data-label="Qual">${Math.round(r.quality*100)}</td><td class="num" data-label="Att’n">${Math.round(r.attention*100)}</td>
     <td class="num metric ${r.gap>=0?"pos":"neg"}" data-label="Gap">${r.gap>0?"+":""}${Math.round(r.gap*100)}</td></tr>`;}
 function renderGemsBoards(){
-  const r=gemsRows();
-  const under=dedupe(r.filter(x=>x.gap>0).sort((a,b)=>b.gap-a.gap)).slice(0,12);
-  const over=dedupe(r.filter(x=>x.gap<0).sort((a,b)=>a.gap-b.gap)).slice(0,12);
+  const pool=dedupe(gemsRows().filter(r=>r.google_n>=MIN_REV));
+  const under=pool.filter(x=>x.gap>0).sort((a,b)=>b.gap-a.gap).slice(0,12);
+  const over=collapseChains(pool.filter(x=>x.gap<0).sort((a,b)=>a.gap-b.gap)).slice(0,12);
   document.getElementById("gem-under").innerHTML=under.map(gemRow).join("")||empty();
   document.getElementById("gem-over").innerHTML=over.map(gemRow).join("")||empty();
 }
@@ -819,5 +906,5 @@ function renderFindings(){
     </div>`;
 }
 
-renderNav(); renderView();
+applyRoute();
 </script>
